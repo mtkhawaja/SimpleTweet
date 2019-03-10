@@ -48,6 +48,17 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
         // Toast.makeText(context, tweet.user.profileImageURL, Toast.LENGTH_SHORT).show();
     }
 
+    public  void clear(){
+        tweets.clear();
+        notifyDataSetChanged();
+    }
+
+    public  void addTweets(List <Tweet> tweetsList){
+        tweets.addAll(tweetsList);
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public int getItemCount() {
         return tweets.size();
