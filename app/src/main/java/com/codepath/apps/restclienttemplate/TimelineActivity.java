@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.adapters.TweetAdapter;
+import com.codepath.apps.restclienttemplate.interfaces.EndlessRecyclerViewScrollListener;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.github.scribejava.core.model.Response;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -29,6 +30,9 @@ public class TimelineActivity extends AppCompatActivity {
     private TweetAdapter tweetAdapter;
     private List<Tweet>  tweets;
     private SwipeRefreshLayout swipeContainer;
+    private EndlessRecyclerViewScrollListener scrollListener;
+    private LinearLayoutManager linearLayoutManager;
+    private long sinceID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +42,18 @@ public class TimelineActivity extends AppCompatActivity {
         rv = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();
         tweetAdapter = new TweetAdapter(this, tweets);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(tweetAdapter);
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                loadMoreData();
+                Log.d("Pagination","OnLoad more Method invoked");
+            }
+        };
+        
+        rv.addOnScrollListener(scrollListener);
         populateHomeTimeline();
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -49,6 +63,21 @@ public class TimelineActivity extends AppCompatActivity {
                 populateHomeTimeline();
             }
         });
+    }
+
+    private void loadMoreData() {
+        // 1. Send an API request to retrieve appropriate paginated data
+        // 2. Deserialize and construct new model objects from the API response
+        // 3. Append the new data objects to the existing set of items inside the array of items
+        // 4. Notify the adapter of the new items made with `notifyItemRangeInserted()`
+        sinceID = getSinceID();
+        client.getNextPageOfTweets(new JsonHttpResponseHandler(){
+
+        }, sinceID);
+
+    }
+    long getSinceID(){
+        return tweets.size() - 1;
     }
     private void populateHomeTimeline(){
         client.getHomeTimeline(new JsonHttpResponseHandler(){
@@ -60,9 +89,7 @@ public class TimelineActivity extends AppCompatActivity {
                        JSONObject jsonTweetObject = response.getJSONObject(i);
                         Tweet tweet = Tweet.fromJSON(jsonTweetObject );
                         tweets.add(tweet);
-
                         tweetsToAdd.add(tweet);
-
                         tweetAdapter.notifyItemInserted(tweets.size());
                     } catch (JSONException e) {
                         e.printStackTrace();
