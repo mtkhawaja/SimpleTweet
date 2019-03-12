@@ -24,6 +24,8 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
+import static java.lang.Integer.parseInt;
+
 public class TimelineActivity extends AppCompatActivity {
     private TwitterClient client;
     private RecyclerView rv;
@@ -32,7 +34,7 @@ public class TimelineActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeContainer;
     private EndlessRecyclerViewScrollListener scrollListener;
     private LinearLayoutManager linearLayoutManager;
-    private long sinceID;
+    private long lastTweetID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,15 +72,47 @@ public class TimelineActivity extends AppCompatActivity {
         // 2. Deserialize and construct new model objects from the API response
         // 3. Append the new data objects to the existing set of items inside the array of items
         // 4. Notify the adapter of the new items made with `notifyItemRangeInserted()`
-        sinceID = getSinceID();
+        Log.d("First Tweet B4 Ref", (tweets.get(0).uid));
+        lastTweetID = getSinceID();
+        Log.d("Last Tweet B4 Ref", Long.toString(lastTweetID));
         client.getNextPageOfTweets(new JsonHttpResponseHandler(){
 
-        }, sinceID);
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                List <Tweet> tweetsToAdd = new ArrayList<>();
+                for (int i = 0; i < response.length(); i++){
+                    try {
+                        JSONObject jsonTweetObject = response.getJSONObject(i);
+                        Tweet tweet = Tweet.fromJSON(jsonTweetObject );
+                        tweets.add(tweet);
+                        tweetsToAdd.add(tweet);
+                        tweetAdapter.notifyItemInserted(tweets.size());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+              //  tweetAdapter.clear();
+                tweetAdapter.addTweets(tweetsToAdd);
+                swipeContainer.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        }, lastTweetID);
 
     }
     long getSinceID(){
-        return tweets.size() - 1;
+        return  Long.parseLong( tweets.get(tweets.size()-1).uid) -1;
     }
+
     private void populateHomeTimeline(){
         client.getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
