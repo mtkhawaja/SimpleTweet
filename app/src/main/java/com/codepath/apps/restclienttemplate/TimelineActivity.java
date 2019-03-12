@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -30,13 +34,15 @@ public class TimelineActivity extends AppCompatActivity {
     private TwitterClient client;
     private RecyclerView rv;
     private TweetAdapter tweetAdapter;
-    private List<Tweet>  tweets;
+    private List<Tweet> tweets;
     private SwipeRefreshLayout swipeContainer;
     private EndlessRecyclerViewScrollListener scrollListener;
     private LinearLayoutManager linearLayoutManager;
     private long lastTweetID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
         client = TwitterApplication.getRestClient(this);
@@ -51,17 +57,17 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 loadMoreData();
-                Log.d("Pagination","OnLoad more Method invoked");
+                Log.d("Pagination", "OnLoad more Method invoked");
             }
         };
-        
+
         rv.addOnScrollListener(scrollListener);
         populateHomeTimeline();
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("TwitterClient","content is being refreshed");
+                Log.d("TwitterClient", "content is being refreshed");
                 populateHomeTimeline();
             }
         });
@@ -75,16 +81,16 @@ public class TimelineActivity extends AppCompatActivity {
         Log.d("First Tweet B4 Ref", (tweets.get(0).uid));
         lastTweetID = getSinceID();
         Log.d("Last Tweet B4 Ref", Long.toString(lastTweetID));
-        client.getNextPageOfTweets(new JsonHttpResponseHandler(){
+        client.getNextPageOfTweets(new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
-                List <Tweet> tweetsToAdd = new ArrayList<>();
-                for (int i = 0; i < response.length(); i++){
+                List<Tweet> tweetsToAdd = new ArrayList<>();
+                for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonTweetObject = response.getJSONObject(i);
-                        Tweet tweet = Tweet.fromJSON(jsonTweetObject );
+                        Tweet tweet = Tweet.fromJSON(jsonTweetObject);
                         tweets.add(tweet);
                         tweetsToAdd.add(tweet);
                         tweetAdapter.notifyItemInserted(tweets.size());
@@ -92,7 +98,7 @@ public class TimelineActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-              //  tweetAdapter.clear();
+                //  tweetAdapter.clear();
                 tweetAdapter.addTweets(tweetsToAdd);
                 swipeContainer.setRefreshing(false);
             }
@@ -109,19 +115,20 @@ public class TimelineActivity extends AppCompatActivity {
         }, lastTweetID);
 
     }
-    long getSinceID(){
-        return  Long.parseLong( tweets.get(tweets.size()-1).uid) -1;
+
+    long getSinceID() {
+        return Long.parseLong(tweets.get(tweets.size() - 1).uid) - 1;
     }
 
-    private void populateHomeTimeline(){
-        client.getHomeTimeline(new JsonHttpResponseHandler(){
+    private void populateHomeTimeline() {
+        client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                List <Tweet> tweetsToAdd = new ArrayList<>();
-                for (int i = 0; i < response.length(); i++){
+                List<Tweet> tweetsToAdd = new ArrayList<>();
+                for (int i = 0; i < response.length(); i++) {
                     try {
-                       JSONObject jsonTweetObject = response.getJSONObject(i);
-                        Tweet tweet = Tweet.fromJSON(jsonTweetObject );
+                        JSONObject jsonTweetObject = response.getJSONObject(i);
+                        Tweet tweet = Tweet.fromJSON(jsonTweetObject);
                         tweets.add(tweet);
                         tweetsToAdd.add(tweet);
                         tweetAdapter.notifyItemInserted(tweets.size());
@@ -131,7 +138,7 @@ public class TimelineActivity extends AppCompatActivity {
                 }
                 tweetAdapter.clear();
                 tweetAdapter.addTweets(tweetsToAdd);
-              //  Log.d("TwitterClient", response.toString());
+                //  Log.d("TwitterClient", response.toString());
                 swipeContainer.setRefreshing(false);
             }
 
@@ -145,5 +152,13 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.e("JSON Obj. Err. ", errorResponse.toString());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is presen
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+
     }
 }

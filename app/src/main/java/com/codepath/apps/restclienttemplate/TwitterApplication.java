@@ -3,6 +3,8 @@ package com.codepath.apps.restclienttemplate;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Menu;
 
 import com.facebook.stetho.Stetho;
 
@@ -22,8 +24,9 @@ public class TwitterApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         // when upgrading versions, kill the original tables by using
-		// fallbackToDestructiveMigration()
+        // fallbackToDestructiveMigration()
         myDatabase = Room.databaseBuilder(this, MyDatabase.class,
                 MyDatabase.NAME).fallbackToDestructiveMigration().build();
 
@@ -38,4 +41,5 @@ public class TwitterApplication extends Application {
     public MyDatabase getMyDatabase() {
         return myDatabase;
     }
+
 }
