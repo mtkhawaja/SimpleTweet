@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -87,9 +88,10 @@ public class ComposeActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void afterTextChanged(Editable s) {
-                charCount.setText(Integer.toString(etCompose.getText().length()));
+                charCount.setText(Integer.toString(140 - etCompose.getText().length())) ;
             }
         });
 
