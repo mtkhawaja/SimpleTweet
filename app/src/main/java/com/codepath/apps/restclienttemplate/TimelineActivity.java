@@ -1,5 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
+import android.os.Parcel;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +40,7 @@ public class TimelineActivity extends AppCompatActivity {
     private TweetAdapter tweetAdapter;
     private List<Tweet> tweets;
     private SwipeRefreshLayout swipeContainer;
+    private final int REQUEST_CODE = 20;
     private EndlessRecyclerViewScrollListener scrollListener;
     private LinearLayoutManager linearLayoutManager;
     private long lastTweetID;
@@ -153,12 +158,39 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
     }
+    // Menu Related Methods
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is presen
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        // Tapped on Compose Icon
+
+        if(item.getItemId() == R.id.compose){
+            Intent i = new Intent(this, ComposeActivity.class);
+            this.startActivityForResult(i, REQUEST_CODE);
+            // Navigate to new activities.
+            return true;
+        };
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if( (requestCode == REQUEST_CODE) && (resultCode == RESULT_OK)){
+            //Pull info out of the data intent.
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            // Update recycler view.
+            tweets.add(0, tweet);
+            // Tell adapter
+            tweetAdapter.notifyItemInserted(0);
+            rv.smoothScrollToPosition(0);
+        }
     }
 }

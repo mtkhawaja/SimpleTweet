@@ -4,13 +4,18 @@ import com.codepath.apps.restclienttemplate.helper.TimeFormatter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class Tweet {
     public String body;
     public String uid;
     public String createdAt;
     public String relativeTime;
     public User user;
+
+    public Tweet(){//For Parceler
+    }
 
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
         Tweet tweet     = new Tweet();
