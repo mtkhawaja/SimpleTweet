@@ -8,6 +8,7 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Tweet {
+    /********************************** Instance Variables **************************************/
     public String body;
     public String uid;
     String createdAt;

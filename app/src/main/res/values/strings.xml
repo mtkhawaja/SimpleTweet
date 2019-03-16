@@ -7,11 +7,11 @@
     <string name="intent_host">cprest</string>
     <string name="tweet_compose_hint">What\'s on your mind?</string>
     <string name="tweet">Tweet</string>
-    <string name="twitter_handle">twitter-handle</string>
-    <string name="timestamp">timeStamp</string>
-    <string name="twitter_name">twitter-name</string>
     <string name="tweetBodySample">Roses are red, violets are blue, I wonder who might be reading this.</string>
     <string name="compose">Compose</string>
     <string name="home">home</string>
+    <string name="fav_count">fav_count</string>
+    <string name="retweet_count">retweet_count</string>
+    <string name="tweet_poster_image">tweet poster image</string>
 
 </resources>

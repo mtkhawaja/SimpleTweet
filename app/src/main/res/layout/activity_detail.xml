@@ -20,8 +20,9 @@
         android:layout_marginEnd="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="0dp"
-        android:paddingRight="5dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:paddingEnd="5dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/tweet_poster_image"/>
 
     <TextView
         android:id="@+id/detailScreenName"
@@ -39,8 +40,9 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="5sp"
-        android:text="twitter-handle"
-        android:textSize="18sp" />
+        android:text="twitter_handle"
+        android:textSize="18sp"
+        tools:targetApi="o"/>
 
     <TextView
         android:id="@+id/detailCreatedAt"
@@ -59,8 +61,9 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="5sp"
-        android:text="timeStamp"
-        android:textSize="18sp" />
+        android:text="6hrs"
+        android:textSize="18sp"
+        tools:targetApi="o"/>
 
     <TextView
         android:id="@+id/detailName"
@@ -78,9 +81,10 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="5sp"
-        android:text="twitter-name"
+        android:text="twitter_name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/detailBody"
@@ -100,7 +104,8 @@
         android:paddingLeft="3sp"
         android:text="@string/tweetBodySample"
         android:textSize="30sp"
-        android:typeface="normal" />
+        android:typeface="normal"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/fav_count"
@@ -110,7 +115,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="96dp"
-        android:text="fav_count"
+        android:text="@string/fav_count"
         android:textSize="20sp" />
 
     <TextView
@@ -121,7 +126,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="52dp"
-        android:text="retweet_count"
+        android:text="@string/retweet_count"
         android:textSize="20sp" />
 
 </RelativeLayout>
