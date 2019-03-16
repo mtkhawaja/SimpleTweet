@@ -10,20 +10,24 @@ import org.parceler.Parcel;
 public class Tweet {
     public String body;
     public String uid;
-    public String createdAt;
-    public String relativeTime;
-    public User user;
+    String createdAt;
+    public String   relativeTime ;
+    public int      retweetCount ;
+    public int      favoriteCount;
+    public User     user         ;
 
     public Tweet(){//For Parceler
     }
 
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
-        Tweet tweet     = new Tweet();
-        tweet.body      = jsonObject.getString("text");
-        tweet.uid       = jsonObject.getString("id");
-        tweet.createdAt = jsonObject.getString("created_at");
-        tweet.relativeTime  = getFormattedCreatedAt(tweet.createdAt);
-        tweet.user      = User.fromJson(jsonObject.getJSONObject("user"));
+        Tweet tweet         = new Tweet();
+        tweet.retweetCount  = jsonObject.getInt   ("retweet_count"      );
+        tweet.favoriteCount = jsonObject.getInt   ("favorite_count"     );
+        tweet.body          = jsonObject.getString("text"               );
+        tweet.uid           = jsonObject.getString("id"                 );
+        tweet.createdAt     = jsonObject.getString("created_at"         );
+        tweet.relativeTime  = getFormattedCreatedAt(tweet.createdAt           );
+        tweet.user          = User.fromJson(jsonObject.getJSONObject("user")  );
         return tweet;
     }
 

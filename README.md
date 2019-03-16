@@ -2,7 +2,7 @@
 Submitted by: **Muneeb Khawaja**
 **SimpleTweet** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: 6 hours spent in total
+Time spent: **6** hours spent in total
 
 ## User Stories
 
@@ -42,7 +42,8 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [x] The Twitter re-directs to the timeline_activity when tapped. Serves as a Back. 
+* [x] The Twitter icon re-directs to the timeline_activity when tapped. Serves as a Back. 
+* [x] Added re-tweet and favorite count TextViews to the DetailActivity view for Tweets.  
 * [x] User can tap a tweet to display a "detailed" view of that tweet (Stretch Story from Week I of this assignment).
 
 ## Video Walkthrough

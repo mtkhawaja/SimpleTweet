@@ -25,7 +25,8 @@ public class DetailActivity extends AppCompatActivity {
     TextView     detailName          ;
     TextView     detailBody          ;
     TextView     detailCreatedAt     ;
-
+    TextView     retweetCout         ;
+    TextView     favCount            ;
     public  DetailActivity(){}
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,16 +39,21 @@ public class DetailActivity extends AppCompatActivity {
         this.detailName          =    findViewById(R.id.detailName          );
         this.detailBody          =    findViewById(R.id.detailBody          );
         this.detailCreatedAt     =    findViewById(R.id.detailCreatedAt     );
+        this.favCount            =    findViewById(R.id.fav_count           );
+        this.retweetCout         =    findViewById(R.id.retweetCount        );
         bind();
 
     }// On Create
 
+    @SuppressLint("SetTextI18n")
     private void bind (){
         String imgURL = tweet.user.profileImageURL;
         detailScreenName.setText(tweet.user.screenName);
-        detailName.setText(tweet.user.name);
-        detailBody.setText(tweet.body);
-        detailCreatedAt.setText(tweet.relativeTime);
+        detailName.setText      (tweet.user.name);
+        detailBody.setText      (tweet.body);
+        detailCreatedAt.setText (tweet.relativeTime);
+        favCount.setText        ("This tweet has been favorited " + tweet.favoriteCount + " times");
+        retweetCout.setText     ("This tweet has been retweeted " + tweet.retweetCount  + " times");
         Glide.with(this)
                 .load(imgURL)
                 .into(detailProfileImage);
