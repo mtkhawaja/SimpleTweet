@@ -2,21 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tweet"
+    android:id="@+id/tweetDetail"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:background="@android:color/background_light">
 
     <ImageView
-        android:id="@+id/ivDetailProfileImage"
+        android:id="@+id/detailProfileImage"
         android:layout_width="75dp"
         android:layout_height="82dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="0dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
@@ -24,13 +24,13 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvDetailScreenName"
+        android:id="@+id/detailScreenName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="231dp"
+        android:layout_marginTop="110dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:autoSizeMaxTextSize="15dp"
@@ -42,13 +42,13 @@
         android:text="twitter-handle" />
 
     <TextView
-        android:id="@+id/createdAtDetail"
+        android:id="@+id/detailCreatedAt"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="365dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="363dp"
+        android:layout_marginTop="109dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="5dp"
@@ -61,13 +61,13 @@
         android:text="timeStamp" />
 
     <TextView
-        android:id="@+id/nameDetail"
+        android:id="@+id/detailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="109dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:autoSizeMaxTextSize="15dp"
@@ -80,13 +80,13 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvBodyDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:id="@+id/detailBody"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="141dp"
         android:autoLink="all"
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="13sp"
@@ -95,18 +95,8 @@
         android:linksClickable="true"
         android:maxLines="4"
         android:paddingLeft="3sp"
-        android:text="Roses are red, violets are blue, I wonder who might be reading this."
+        android:text="@string/tweetBodySample"
         android:textSize="15sp"
         android:typeface="normal" />
-
-    <View
-        android:id="@+id/dividerDetail"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/listDivider" />
 
 </RelativeLayout>

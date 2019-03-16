@@ -35,6 +35,7 @@ import cz.msebera.android.httpclient.Header;
 import static java.lang.Integer.parseInt;
 
 public class TimelineActivity extends AppCompatActivity {
+    /********************************** Instance Variables **************************************/
     private TwitterClient client;
     private RecyclerView rv;
     private TweetAdapter tweetAdapter;
@@ -173,7 +174,13 @@ public class TimelineActivity extends AppCompatActivity {
             this.startActivityForResult(i, REQUEST_CODE);
             // Navigate to new activities.
             return true;
-        };
+        }
+
+        if(item.getItemId() == R.id.twitter_logo_action){
+            Intent i = new Intent(this, TimelineActivity.class);
+            finish();
+            this.startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
     }
 

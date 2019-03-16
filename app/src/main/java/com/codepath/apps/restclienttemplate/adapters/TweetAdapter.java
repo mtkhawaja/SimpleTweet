@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate.adapters;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,12 +18,18 @@ import com.codepath.apps.restclienttemplate.DetailActivity;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
 import java.util.List;
 
-public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder> {
 
+public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder> {
+    /********************************** Instance Variables **************************************/
     private Context         context ;
     private List <Tweet>     tweets ;
+
+    public TweetAdapter() {}
 
     public TweetAdapter(Context context, List<Tweet> tweets) {
         this.context    = context ;
@@ -38,7 +45,7 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Tweet tweet = tweets.get(position);
+        final Tweet tweet = tweets.get(position);
         String imgURL = tweet.user.profileImageURL;
 
         viewHolder.tvBody.setText(tweet.body);
@@ -55,7 +62,9 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
         viewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra("tweet", Parcels.wrap(tweet));
                 context.startActivity(i);
             }
         });
@@ -79,12 +88,12 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
 
     /* ViewHolder Class */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView    ivProfileImage  ;
-        TextView     tvScreenName    ;
-        TextView     name            ;
-        TextView     tvBody          ;
-        TextView     createdAt       ;
-        RelativeLayout container;
+        ImageView       ivProfileImage  ;
+        TextView        tvScreenName    ;
+        TextView        name            ;
+        TextView        tvBody          ;
+        TextView        createdAt       ;
+        RelativeLayout  container       ;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

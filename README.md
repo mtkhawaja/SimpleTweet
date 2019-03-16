@@ -43,7 +43,7 @@ The following **bonus** features are implemented:
 The following **additional** features are implemented:
 
 * [x] The Twitter re-directs to the timeline_activity when tapped. Serves as a Back. 
-
+* [x] User can tap a tweet to display a "detailed" view of that tweet (Stretch Story from Week I of this assignment).
 
 ## Video Walkthrough
 
