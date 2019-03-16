@@ -97,7 +97,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='SimpleTweet_App_Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='SimpleTweet_1_Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [ShareX](https://getsharex.com/).
 
