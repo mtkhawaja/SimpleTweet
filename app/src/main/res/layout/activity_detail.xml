@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tweet"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:background="@android:color/background_light">
 
     <ImageView
-        android:id="@+id/ivProfileImage"
+        android:id="@+id/ivDetailProfileImage"
         android:layout_width="75dp"
         android:layout_height="82dp"
         android:layout_alignParentStart="true"
@@ -24,7 +24,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvScreenName"
+        android:id="@+id/tvDetailScreenName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -39,11 +39,10 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="5sp"
-        android:text="@string/twitter_handle"
-        tools:targetApi="o" />
+        android:text="twitter-handle" />
 
     <TextView
-        android:id="@+id/createdAt"
+        android:id="@+id/createdAtDetail"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -59,11 +58,10 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="5sp"
-        android:text="@string/timestamp"
-        tools:ignore="RtlHardcoded" />
+        android:text="timeStamp" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/nameDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -78,11 +76,11 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="5sp"
-        android:text="@string/twitter_name"
+        android:text="twitter-name"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvBody"
+        android:id="@+id/tvBodyDetail"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
@@ -97,12 +95,12 @@
         android:linksClickable="true"
         android:maxLines="4"
         android:paddingLeft="3sp"
-        android:text="@string/tweetBodySample"
+        android:text="Roses are red, violets are blue, I wonder who might be reading this."
         android:textSize="15sp"
         android:typeface="normal" />
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/dividerDetail"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentTop="true"

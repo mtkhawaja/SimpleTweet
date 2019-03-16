@@ -6,13 +6,13 @@
         android:id="@+id/twitter_logo_action"
         android:checkable="true"
         android:icon="@drawable/ic_twitter_logo_whiteonblue"
-        android:title="home"
+        android:title="@string/home"
         android:orderInCategory="1"
         app:showAsAction="always" />
     <item
         android:id="@+id/compose"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="Compose"
-        app:showAsAction="always" />
+        android:icon="@drawable/ic_twitter_compose"
+        android:title="@string/compose"
+        app:showAsAction="ifRoom" />
 
 </menu>

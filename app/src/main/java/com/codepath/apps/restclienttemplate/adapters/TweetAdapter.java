@@ -1,17 +1,19 @@
 package com.codepath.apps.restclienttemplate.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.codepath.apps.restclienttemplate.ComposeActivity;
+import com.codepath.apps.restclienttemplate.DetailActivity;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
@@ -48,7 +50,16 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
                 .load(imgURL)
                 .into(viewHolder.ivProfileImage);
         // Toast.makeText(context, tweet.user.profileImageURL, Toast.LENGTH_SHORT).show();
-    }
+
+        //Detailed Tweet View Activity
+        viewHolder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DetailActivity.class);
+                context.startActivity(i);
+            }
+        });
+    } // On Bind View Holder
 
     public  void clear(){
         tweets.clear();
@@ -68,19 +79,21 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
 
     /* ViewHolder Class */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView    ivProfileImage  ;
-        public TextView     tvScreenName    ;
-        public TextView     name            ;
-        public TextView     tvBody          ;
-        public TextView     createdAt       ;
+        ImageView    ivProfileImage  ;
+        TextView     tvScreenName    ;
+        TextView     name            ;
+        TextView     tvBody          ;
+        TextView     createdAt       ;
+        RelativeLayout container;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.ivProfileImage =    itemView.findViewById(R.id.ivProfileImage);
             this.tvScreenName   =    itemView.findViewById(R.id.tvScreenName  );
             this.name           =    itemView.findViewById(R.id.name          );
             this.tvBody         =    itemView.findViewById(R.id.tvBody        );
-            this.createdAt      =    itemView.findViewById(R.id.createdAt     );   ;
+            this.createdAt      =    itemView.findViewById(R.id.createdAt     );
+            this.container      =    itemView.findViewById(R.id.tweet         );
         }
 
         @Override

@@ -41,9 +41,6 @@ public class TimelineActivity extends AppCompatActivity {
     private List<Tweet> tweets;
     private SwipeRefreshLayout swipeContainer;
     private final int REQUEST_CODE = 20;
-    private EndlessRecyclerViewScrollListener scrollListener;
-    private LinearLayoutManager linearLayoutManager;
-    private long lastTweetID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +52,10 @@ public class TimelineActivity extends AppCompatActivity {
         rv = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();
         tweetAdapter = new TweetAdapter(this, tweets);
-        linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(tweetAdapter);
-        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+        EndlessRecyclerViewScrollListener scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 loadMoreData();
@@ -84,7 +81,7 @@ public class TimelineActivity extends AppCompatActivity {
         // 3. Append the new data objects to the existing set of items inside the array of items
         // 4. Notify the adapter of the new items made with `notifyItemRangeInserted()`
         Log.d("First Tweet B4 Ref", (tweets.get(0).uid));
-        lastTweetID = getSinceID();
+        long lastTweetID = getSinceID();
         Log.d("Last Tweet B4 Ref", Long.toString(lastTweetID));
         client.getNextPageOfTweets(new JsonHttpResponseHandler() {
 
